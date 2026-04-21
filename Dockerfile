@@ -46,7 +46,7 @@ ENV CHROMIUM_PATH=/usr/bin/chromium
 
 ENV PORT=8080
 
-HEALTHCHECK --interval=30s --timeout=10s --start-period=10s \
-  CMD wget -q --http-user="" --http-password="" --spider http://localhost:8080/health/ready || exit 1
+HEALTHCHECK --interval=30s --timeout=10s --start-period=15s \
+  CMD wget -q --http-user="" --http-password="" --spider http://localhost:8080/health || exit 1
 
 CMD ["bun", "dist/index.js"]
