@@ -63,36 +63,60 @@ app.notFound((c) => {
 });
 
 const startServer = async () => {
+  const port = config.PORT;
+  const maxRetries = 5;
+  const baseDelay = 1000;
+
   try {
     logger.info("Initializing browser pool...");
     await browserPool.initialize();
     logger.info("Browser pool initialized");
   } catch (error) {
     logger.error({ error }, "Failed to initialize browser pool");
+    await browserPool.close();
+    process.exit(1);
   }
 
-  const port = config.PORT;
+  const startWithRetry = async (attempt: number): Promise<void> => {
+    try {
+      logger.info({ port, attempt }, "Starting server...");
 
-  logger.info({ port }, "Starting server...");
+      const server = serve({
+        fetch: app.fetch,
+        port,
+      });
 
-  const server = serve({
-    fetch: app.fetch,
-    port,
-  });
+      logger.info({ port, pid: process.pid }, "Server started");
+      return;
+    } catch (error: unknown) {
+      const err = error as { code?: string; port?: number };
+      if (err.code === "EADDRINUSE" && attempt < maxRetries) {
+        const delay = baseDelay * Math.pow(2, attempt) + Math.random() * 1000;
+        logger.warn({ port, attempt, nextRetry: Math.round(delay) }, "Port in use, retrying...");
+        await new Promise((resolve) => setTimeout(resolve, delay));
+        return startWithRetry(attempt + 1);
+      }
+      if (err.code === "EADDRINUSE") {
+        logger.error({ port }, "Failed to start server: port permanently in use");
+        await browserPool.close();
+        process.exit(1);
+      }
+      logger.error({ error }, "Failed to start server");
+      await browserPool.close();
+      process.exit(1);
+    }
+  };
 
-  logger.info({ port, pid: process.pid }, "Server started");
+  await startWithRetry(0);
 
-  process.on("SIGTERM", async () => {
-    logger.info("SIGTERM received, closing browser pool...");
+  const shutdown = async () => {
+    logger.info("Shutdown signal received, closing browser pool...");
     await browserPool.close();
     process.exit(0);
-  });
+  };
 
-  process.on("SIGINT", async () => {
-    logger.info("SIGINT received, closing browser pool...");
-    await browserPool.close();
-    process.exit(0);
-  });
+  process.on("SIGTERM", shutdown);
+  process.on("SIGINT", shutdown);
 };
 
 startServer();
