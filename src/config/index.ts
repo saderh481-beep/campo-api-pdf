@@ -2,7 +2,7 @@ import { z } from "zod";
 import type { EnvConfig } from "../types/index.ts";
 
 const EnvSchema = z.object({
-  PORT: z.coerce.number().default(3002),
+  PORT: z.coerce.number().default(8080),
   JWT_SECRET: z.string().min(32),
   API_KEY_WEB: z.string().min(8),
   BROWSER_MAX_PAGES: z.coerce.number().default(3),
@@ -14,7 +14,7 @@ const EnvSchema = z.object({
 
 function loadConfig(): EnvConfig {
   const raw = {
-    PORT: process.env.PORT ?? "3002",
+    PORT: process.env.PORT ?? "8080",
     JWT_SECRET: process.env.JWT_SECRET ?? "default-jwt-secret-change-in-production",
     API_KEY_WEB: process.env.API_KEY_WEB ?? "dev-web-key",
     BROWSER_MAX_PAGES: process.env.BROWSER_MAX_PAGES ?? "3",

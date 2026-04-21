@@ -28,7 +28,7 @@ API REST para generación de PDFs de bitácoras de campo.
 Información básica del servicio.
 
 ```bash
-curl http://localhost:3002/
+curl http://localhost:8080/
 ```
 
 **Respuesta:**
@@ -45,7 +45,7 @@ curl http://localhost:3002/
 Health check básico.
 
 ```bash
-curl http://localhost:3002/health
+curl http://localhost:8080/health
 ```
 
 **Respuesta:**
@@ -62,7 +62,7 @@ curl http://localhost:3002/health
 Health check con verificación del pool de Chromium.
 
 ```bash
-curl http://localhost:3002/health/ready
+curl http://localhost:8080/health/ready
 ```
 
 **Respuesta:**
@@ -84,7 +84,7 @@ curl http://localhost:3002/health/ready
 Estadísticas del pool de páginas del navegador.
 
 ```bash
-curl http://localhost:3002/health/stats
+curl http://localhost:8080/health/stats
 ```
 
 **Respuesta:**
@@ -157,7 +157,7 @@ X-API-Key: <api-key>
 **Ejemplo de Request:**
 
 ```bash
-curl -X POST http://localhost:3002/api/v1/pdf/generate \
+curl -X POST http://localhost:8080/api/v1/pdf/generate \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer tu-jwt-token" \
   -d '{
@@ -198,7 +198,7 @@ curl -X POST http://localhost:3002/api/v1/pdf/generate \
 Igual que `/generate` pero con `Content-Disposition: attachment` para descarga directa.
 
 ```bash
-curl -X POST http://localhost:3002/api/v1/pdf/generate/download \
+curl -X POST http://localhost:8080/api/v1/pdf/generate/download \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer tu-jwt-token" \
   -d '{ ... }' \
@@ -470,7 +470,7 @@ curl -H "X-API-Key: tu-api-key" ...
 
 ```javascript
 const generatePdf = async (bitacoraData) => {
-  const response = await fetch('http://localhost:3002/api/v1/pdf/generate', {
+  const response = await fetch('http://localhost:8080/api/v1/pdf/generate', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -495,7 +495,7 @@ import requests
 
 def generate_pdf(bitacora_data: dict, token: str) -> bytes:
     response = requests.post(
-        "http://localhost:3002/api/v1/pdf/generate",
+        "http://localhost:8080/api/v1/pdf/generate",
         json=bitacora_data,
         headers={
             "Content-Type": "application/json",
@@ -509,7 +509,7 @@ def generate_pdf(bitacora_data: dict, token: str) -> bytes:
 
 ```bash
 # Generar PDF de beneficiario
-curl -X POST http://localhost:3002/api/v1/pdf/generate/beneficiario \
+curl -X POST http://localhost:8080/api/v1/pdf/generate/beneficiario \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer tu-token" \
   -d '{

@@ -29,7 +29,7 @@ Edita `.env` con tus valores:
 
 ```env
 # Puerto del servidor
-PORT=3002
+PORT=8080
 
 # Secreto JWT para autenticación (mínimo 32 caracteres)
 JWT_SECRET=tu-secret-jwt-muy-largo-y-seguro-aqui
@@ -72,13 +72,13 @@ bun run docker:build
 bun run docker:run
 ```
 
-El servidor estará disponible en `http://localhost:3002`
+El servidor estará disponible en `http://localhost:8080`
 
 ## Verificación
 
 ```bash
-curl http://localhost:3002/health
-curl http://localhost:3002/health/ready
+curl http://localhost:8080/health
+curl http://localhost:8080/health/ready
 ```
 
 ## Scripts Disponibles

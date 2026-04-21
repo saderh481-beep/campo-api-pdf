@@ -31,8 +31,11 @@ class BrowserPool {
       const log = createRequestLogger("browser-pool-init");
       log.info("Initializing browser pool...");
 
+      const chromiumPath = config.CHROMIUM_PATH || process.env.CHROMIUM_PATH || "/usr/bin/chromium";
+
       const launchOptions: Parameters<typeof puppeteer.launch>[0] = {
         headless: true,
+        executablePath: chromiumPath,
         args: [
           "--no-sandbox",
           "--disable-setuid-sandbox",
@@ -54,20 +57,7 @@ class BrowserPool {
         ],
       };
 
-      if (config.CHROMIUM_PATH) {
-        launchOptions.executablePath = config.CHROMIUM_PATH;
-      } else {
-        try {
-          const chromiumMin = await import("@sparticuz/chromium-min");
-          // @ts-expect-error - chromium-min types
-          const chromePath = process.env.CHROMIUM_PATH || (chromiumMin.executablePath as () => string)();
-          if (chromePath) {
-            launchOptions.executablePath = chromePath;
-          }
-        } catch {
-          // @sparticuz/chromium-min not available in dev
-        }
-      }
+      log.info({ chromiumPath }, "Launching Chromium...");
 
       this.browser = await puppeteer.launch(launchOptions);
 

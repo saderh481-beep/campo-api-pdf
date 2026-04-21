@@ -8,7 +8,7 @@
     "start": "bun src/index.ts",
     "build": "bun build src/index.ts --target bun --outdir ./dist",
     "docker:build": "docker build -t campo-api-pdf .",
-    "docker:run": "docker run -p 3002:3002 --env-file .env campo-api-pdf"
+    "docker:run": "docker run -p 8080:8080 --env-file .env campo-api-pdf"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.1",
