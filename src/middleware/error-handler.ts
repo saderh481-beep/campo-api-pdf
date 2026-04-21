@@ -1,6 +1,6 @@
 import { createMiddleware } from "hono/factory";
-import { createRequestLogger, maskSensitiveData } from "@/utils/logger.ts";
-import type { AppContext } from "@/types/index.ts";
+import { createRequestLogger, maskSensitiveData } from "../utils/logger.ts";
+import type { AppContext } from "../types/index.ts";
 
 export class AppError extends Error {
   constructor(

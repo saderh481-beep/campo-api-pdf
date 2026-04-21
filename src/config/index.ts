@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { EnvConfig } from "@/types/index.ts";
+import type { EnvConfig } from "../types/index.ts";
 
 const EnvSchema = z.object({
   PORT: z.coerce.number().default(3002),

@@ -1,8 +1,8 @@
 import { createMiddleware } from "hono/factory";
 import { jwtVerify } from "jose";
-import { config } from "@/config/index.ts";
-import { createRequestLogger } from "@/utils/logger.ts";
-import type { AppContext } from "@/types/index.ts";
+import { config } from "../config/index.ts";
+import { createRequestLogger } from "../utils/logger.ts";
+import type { AppContext } from "../types/index.ts";
 
 const JWT_SECRET_BYTES = new TextEncoder().encode(config.JWT_SECRET);
 

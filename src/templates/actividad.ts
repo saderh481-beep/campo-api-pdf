@@ -1,5 +1,5 @@
-import type { ActividadData, ConfigColores } from "@/types/index.ts";
-import { formatDate, formatPhone } from "@/utils/helpers.ts";
+import type { ActividadData, ConfigColores } from "../types/index.ts";
+import { formatDate, formatPhone } from "../utils/helpers.ts";
 
 export function getActividadTemplate(
   data: ActividadData,

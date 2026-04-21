@@ -1,16 +1,16 @@
 import { type Page } from "puppeteer-core";
-import { config } from "@/config/index.ts";
-import { createRequestLogger } from "@/utils/logger.ts";
+import { config } from "../config/index.ts";
+import { createRequestLogger } from "../utils/logger.ts";
 import { browserPool } from "./browser-pool.ts";
-import { getBeneficiarioTemplate } from "@/templates/beneficiario.ts";
-import { getActividadTemplate } from "@/templates/actividad.ts";
-import { getStyles } from "@/templates/styles.ts";
+import { getBeneficiarioTemplate } from "../templates/beneficiario.ts";
+import { getActividadTemplate } from "../templates/actividad.ts";
+import { getStyles } from "../templates/styles.ts";
 import type {
   GeneratePdfRequest,
   Config,
   BeneficiarioData,
   ActividadData,
-} from "@/types/index.ts";
+} from "../types/index.ts";
 
 interface GeneratePdfOptions {
   tipo: "beneficiario" | "actividad";

@@ -1,13 +1,13 @@
 import { Hono } from "hono";
-import { generatePdfFromRequest, validateDataForTipo } from "@/services/pdf-generator.ts";
+import { generatePdfFromRequest, validateDataForTipo } from "../services/pdf-generator.ts";
 import {
   GeneratePdfRequestSchema,
   GenerateBeneficiarioPdfRequestSchema,
   GenerateActividadPdfRequestSchema,
-} from "@/types/index.ts";
-import { createRequestLogger } from "@/utils/logger.ts";
-import { authMiddleware } from "@/middleware/auth.ts";
-import { AppError } from "@/middleware/error-handler.ts";
+} from "../types/index.ts";
+import { createRequestLogger } from "../utils/logger.ts";
+import { authMiddleware } from "../middleware/auth.ts";
+import { AppError } from "../middleware/error-handler.ts";
 
 const pdf = new Hono();
 

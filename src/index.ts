@@ -2,12 +2,12 @@ import { Hono } from "hono";
 import { serve } from "@hono/node-server";
 import { cors } from "hono/cors";
 import { randomUUID } from "crypto";
-import { getConfig } from "@/config/index.ts";
-import { logger, createRequestLogger } from "@/utils/logger.ts";
-import { getErrorMiddleware } from "@/middleware/error-handler.ts";
-import { browserPool } from "@/services/browser-pool.ts";
-import healthRoutes from "@/routes/health.ts";
-import pdfRoutes from "@/routes/pdf.ts";
+import { getConfig } from "./config/index.ts";
+import { logger, createRequestLogger } from "./utils/logger.ts";
+import { getErrorMiddleware } from "./middleware/error-handler.ts";
+import { browserPool } from "./services/browser-pool.ts";
+import healthRoutes from "./routes/health.ts";
+import pdfRoutes from "./routes/pdf.ts";
 
 const app = new Hono<{ Variables: { requestId: string } }>();
 

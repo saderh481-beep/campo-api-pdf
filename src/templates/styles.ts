@@ -1,4 +1,4 @@
-import type { ConfigColores } from "@/types/index.ts";
+import type { ConfigColores } from "../types/index.ts";
 
 export function getStyles(colors: ConfigColores): string {
   const primario = colors.primario ?? "#1a5f2a";

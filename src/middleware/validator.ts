@@ -1,6 +1,6 @@
 import { createMiddleware } from "hono/factory";
 import { z } from "zod";
-import type { AppContext } from "@/types/index.ts";
+import type { AppContext } from "../types/index.ts";
 
 export function validateBody<T extends z.ZodType>(schema: T) {
   return createMiddleware<AppContext>(async (c, next) => {

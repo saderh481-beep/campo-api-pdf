@@ -1,6 +1,6 @@
 import puppeteer, { type Browser, type Page } from "puppeteer-core";
-import { config } from "@/config/index.ts";
-import { createRequestLogger } from "@/utils/logger.ts";
+import { config } from "../config/index.ts";
+import { createRequestLogger } from "../utils/logger.ts";
 
 interface PooledPage {
   page: Page;

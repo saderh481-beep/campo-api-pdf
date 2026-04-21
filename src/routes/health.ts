@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import { browserPool } from "@/services/browser-pool.ts";
-import { createRequestLogger } from "@/utils/logger.ts";
+import { browserPool } from "../services/browser-pool.ts";
+import { createRequestLogger } from "../utils/logger.ts";
 
 const health = new Hono();
 
