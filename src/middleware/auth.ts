@@ -38,14 +38,6 @@ function verifyApiKey(apiKey: string, requestId: string): {
     };
   }
 
-  if (apiKey === config.API_KEY_APP) {
-    return {
-      id: "api-app",
-      email: "app-service@campo.local",
-      rol: "app",
-    };
-  }
-
   log.warn({ apiKeyPrefix: apiKey.substring(0, 4) }, "Invalid API key attempt");
   return null;
 }

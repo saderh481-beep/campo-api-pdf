@@ -151,7 +151,6 @@ export interface EnvConfig {
   PORT: number;
   JWT_SECRET: string;
   API_KEY_WEB: string;
-  API_KEY_APP: string;
   BROWSER_MAX_PAGES: number;
   BROWSER_TIMEOUT: number;
   BROWSER_IMG_TIMEOUT: number;
