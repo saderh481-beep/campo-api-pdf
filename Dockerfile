@@ -3,17 +3,19 @@ WORKDIR /app
 EXPOSE 3002
 
 FROM base AS installer
+COPY package.json bun.lock ./
 RUN bun install --frozen-lockfile --production
 
 FROM base AS builder
-COPY --from=installer /app/node_modules /app/node_modules
-COPY package.json tsconfig.json ./
+COPY package.json bun.lock ./
+COPY --from=installer /app/node_modules node_modules
 COPY src/ ./src/
 RUN bun build src/index.ts --target bun --outdir ./dist
 
 FROM base
-COPY --from=installer /app/node_modules /app/node_modules
-COPY --from=builder /app/dist /app/dist
+COPY package.json bun.lock ./
+COPY --from=installer /app/node_modules node_modules
+COPY --from=builder /app/dist ./dist
 COPY .env.example ./
 
 ENV NODE_ENV=production
